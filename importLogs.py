@@ -161,13 +161,17 @@ def processFiles(f):
 
     # If we've made it here, then the file ended, and it's possible we still have documents in documents list.  Need to send what we have
     if len(documents) > 0:
-        # bulk send all our entries
-        status = helpers.parallel_bulk(es, documents)
+        try:
+            # bulk send all our entries
+            status = helpers.parallel_bulk(es, documents)
 
-        # look through each result for status
-        for i in status:
-            if i[0] == False:
-                print "There was an error importing a record.  Error: ", i[1]
+            # look through each result for status
+            for i in status:
+                if i[0] == False:
+                    print "There was an error importing a record.  Error: ", i[1]
+                    
+        except Exception as e:
+            print str(e)   
 
         # Using this to have the doc count stay on one line and continually be updated
         sys.stdout.write("Total Documents sent to Elasticsearch: " + str(options.totalDocCount) + "\r")
