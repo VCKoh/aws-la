@@ -43,11 +43,21 @@ The script configures everything that is needed in the ELK stack:
 
   `git clone https://github.com/mike-mosher/aws-la.git && cd aws-la`
 
+- Install Python 2.7.
+
 - Install requirements:
 
   `pip install -r ./requirements.txt`
 
 ## Running the Script
+
+- If you are using "Docker Desktop WSL 2 based engine", increase the limits of virtual memory by:
+
+    ```bash
+    wsl -d docker-desktop
+    sysctl -w vm.max_map_count=262144
+    exit
+    ```
 
 - Bring the docker environment up:
 

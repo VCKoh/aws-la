@@ -5,7 +5,8 @@ services:
     hostname: elasticsearch
     image: docker.elastic.co/elasticsearch/elasticsearch:5.4.0
     ports:
-      - 127.0.0.1:9200:9200
+      - 9200:9200
+      - 9300:9300
     environment:
       - cluster.name=docker-es
       - bootstrap.memory_lock=true
@@ -23,7 +24,7 @@ services:
     hostname: kibana
     image: docker.elastic.co/kibana/kibana:5.4.0
     ports:
-      - 127.0.0.1:5601:5601
+      - 5601:5601
     # Internal network for the containers
     networks:
       - elk-stack
